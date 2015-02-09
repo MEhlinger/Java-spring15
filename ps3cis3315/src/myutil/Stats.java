@@ -82,32 +82,50 @@ public class Stats {
     }
 
     public static int median(int[] a) {
-
-        return 0;
+        int median = a[a.length / 2];
+        return median;
     }
 
     public static double median(double[] b) {
-
-        return 0;
+        double median = b[b.length / 2];
+        return median;
     }
 
     public static double mean(int[] a) {
-
-        return 0;
+        int sum = 0;
+        for (int i = 0 ; i < a.length; i++) {
+            sum+= a[i];
+        }
+        return (sum / a.length);
     }
 
     public static double mean(double[] b) {
-
-        return 0;
+        double sum = 0.0;
+        for (int i = 0; i < b.length; i++) {
+            sum += b[i];
+        }
+        return (sum / b.length);
     }
 
     public static double stddev(int[] a) {
+        double variance;
+        double[] squaredDifferences = new double[a.length];
+        double firstMean = mean(a);
+        for (int i = 0; i < a.length; i++) {
+            squaredDifferences[i] = Math.pow(firstMean - a[i], 2);
+        }
 
-        return 0;
+        return Math.sqrt(mean(squaredDifferences));
     }
 
     public static double stddev(double[] b) {
+        double variance;
+        double[] squaredDifferences = new double[b.length];
+        double firstMean = mean(b);
+        for (int i = 0; i < b.length; i++) {
+            squaredDifferences[i] = Math.pow(firstMean - b[i], 2);
+        }
 
-        return 0;
+        return Math.sqrt(mean(squaredDifferences));
     }
 }
