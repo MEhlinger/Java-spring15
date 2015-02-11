@@ -1,6 +1,7 @@
 package ps3n1Sorting;
 
 import java.util.Random;
+import myutil.Timer;
 
 /**
  * Implement a selection sort similar to listing 7.8 and use it to sort an array
@@ -8,19 +9,26 @@ import java.util.Random;
  * 1000000 numbers using System.currentTimeMillis() to do the timing. Neatly
  * display the results.
  *
- * @author Your Name Here
+ * @author Marshall Ehlinger
  */
 public class N1Sort {
 
     public static void main(String[] args) {
         Random rand = new Random();
-        int[] a = new int[10];
+        Timer clock = new Timer();
+        
+        int[] a = new int[100_000];
+     
         for (int i =0; i < a.length; i++) {
             a[i] = rand.nextInt(a.length);
             System.out.print(a[i] + " ");
         }
         System.out.println();
+        
+        clock.startStopWatch();
         selectionSort(a);
+        System.out.println("Sort Time : " + clock.getStopWatch() + " millis");
+        
         for (int val : a) {
             System.out.print(val + " ");
         }
