@@ -28,7 +28,7 @@ public class N2Sort {
         }
         System.out.println();
         
-        clock.startStopWatch();
+        clock.setStopWatch();
         Arrays.sort(a);
         System.out.println("Sort Time : " + clock.getStopWatch() + " millis");
         

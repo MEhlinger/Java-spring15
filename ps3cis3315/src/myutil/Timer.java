@@ -11,7 +11,7 @@ public class Timer {
     
     private long startWatchTime, stopWatchTime;
     
-    public void startStopWatch() {
+    public void setStopWatch() {
         // Sets startTime to currentTimeMillis to begin counting up time
         startWatchTime = System.currentTimeMillis();
     }

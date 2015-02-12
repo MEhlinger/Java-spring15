@@ -25,7 +25,7 @@ public class N1Sort {
         }
         System.out.println();
         
-        clock.startStopWatch();
+        clock.setStopWatch();
         selectionSort(a);
         System.out.println("Sort Time : " + clock.getStopWatch() + " millis");
         

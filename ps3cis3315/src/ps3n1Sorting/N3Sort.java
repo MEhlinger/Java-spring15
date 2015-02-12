@@ -27,7 +27,7 @@ public class N3Sort {
         }
         System.out.println();
         
-        clock.startStopWatch();
+        clock.setStopWatch();
         Arrays.parallelSort(a);
         System.out.println("Sort Time : " + clock.getStopWatch() + " millis");
         
