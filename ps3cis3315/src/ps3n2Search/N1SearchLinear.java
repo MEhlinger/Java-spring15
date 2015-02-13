@@ -32,6 +32,7 @@ public class N1SearchLinear {
         //Assign result of search (returns index of searched value, or -1) to variable
         clock.setStopWatch();
         int keyValIndex = linearSearch(keyVal, vals);
+        long opTime = clock.getStopWatch();
         
         //Print results of search and time to completion.
         if (keyValIndex > -1) {
@@ -39,7 +40,7 @@ public class N1SearchLinear {
         } else {
             System.out.println(keyVal + " is not in array.");
         }
-        System.out.println("Completed in : " + clock.getStopWatch() + " millis.");
+        System.out.println("Completed in : " + opTime + " millis.");
         
     }
     
