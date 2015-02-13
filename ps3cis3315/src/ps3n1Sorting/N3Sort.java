@@ -2,7 +2,7 @@ package ps3n1Sorting;
 
 import java.util.Arrays;
 import java.util.Random;
-import myutil.Timer;
+import myutil.Stopwatch;
 
 /**
  * Use the java.util.Arrays.parallelSort() method (page 271) to sort an array of
@@ -16,7 +16,7 @@ public class N3Sort {
 
     public static void main(String[] args) {
         Random rand = new Random();
-        Timer clock = new Timer();
+        Stopwatch clock = new Stopwatch();
         
         int[] a = new int[100_000];
         

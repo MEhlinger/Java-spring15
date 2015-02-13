@@ -1,7 +1,7 @@
 package ps3n1Sorting;
 
 import java.util.Random;
-import myutil.Timer;
+import myutil.Stopwatch;
 
 /**
  * Implement a selection sort similar to listing 7.8 and use it to sort an array
@@ -15,7 +15,7 @@ public class N1Sort {
 
     public static void main(String[] args) {
         Random rand = new Random();
-        Timer clock = new Timer();
+        Stopwatch clock = new Stopwatch();
         
         int[] a = new int[100_000];
      

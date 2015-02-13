@@ -2,7 +2,7 @@ package ps3n1Sorting;
 
 import java.util.Arrays;
 import java.util.Random;
-import myutil.Timer;
+import myutil.Stopwatch;
 
 
 /**
@@ -17,7 +17,7 @@ public class N2Sort {
 
     public static void main(String[] args) {
         Random rand = new Random();
-        Timer clock = new Timer();
+        Stopwatch clock = new Stopwatch();
         
         int[] a = new int[100_000];
         

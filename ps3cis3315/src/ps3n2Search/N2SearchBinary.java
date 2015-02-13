@@ -2,7 +2,7 @@ package ps3n2Search;
 
 import java.util.Arrays;
 import java.util.Random;
-import myutil.Timer;
+import myutil.Stopwatch;
 
 /**
  * Write a program to randomly generate an array of 1,000,000 integers and a key
@@ -15,7 +15,7 @@ public class N2SearchBinary {
 
     public static void main(String[] args) {
         Random pseudoRandom = new Random();
-        Timer clock = new Timer();
+        Stopwatch clock = new Stopwatch();
         int[] vals = new int[100_000000];
         
         //Populate array

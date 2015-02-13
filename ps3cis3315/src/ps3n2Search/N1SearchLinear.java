@@ -1,7 +1,7 @@
 package ps3n2Search;
 
 import java.util.Random;
-import myutil.Timer;
+import myutil.Stopwatch;
 
 /**
  * Write a program to randomly generate an array of 1,000,000 integers and a key
@@ -14,7 +14,7 @@ public class N1SearchLinear {
 
     public static void main(String[] args) {
         Random randGen = new Random();
-        Timer clock = new Timer();
+        Stopwatch clock = new Stopwatch();
         
         //Populate array of 1 million elements with random values
         int[] vals = new int[1_000_000];

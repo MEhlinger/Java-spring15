@@ -2,12 +2,12 @@ package myutil;
 
 /**
  *
- * Timer class provides calls System.currentTimeMillis,
- * and compares those calls to get elapsed time periods.
+ * Stopwatch class provides calls System.currentTimeMillis,
+ and compares those calls to get elapsed time periods.
  *
  * @author Marshall Ehlinger
  */
-public class Timer {
+public class Stopwatch {
     
     private long startWatchTime, stopWatchTime;
     
