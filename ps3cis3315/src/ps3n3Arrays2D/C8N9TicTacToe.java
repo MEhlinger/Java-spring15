@@ -1,5 +1,6 @@
 package ps3n3Arrays2D;
 
+import java.util.Random;
 import java.util.Scanner;
 import myutil.Validator;
 
@@ -22,7 +23,6 @@ public class C8N9TicTacToe {
         while (true) {
             //Game logic 
             playerMove(board, playerChar, sc);
-            checkWinner(board, playerChar, botChar);
             if (checkWinner(board, playerChar, botChar) > 0) {
                 break;
             }
@@ -60,11 +60,13 @@ public class C8N9TicTacToe {
                 }
             System.out.println("|");
             }
+        System.out.println();
         }
     
     public static void playerMove(String[][] gameBoard,String playerChar, Scanner inpt) {
         // Allows the player to make a single move, using the numpad layout
-        int[] chosenSpace;// = new int[2];
+        // Then draws board
+        int[] chosenSpace;
                 
         System.out.println();
         while (true) {
@@ -72,7 +74,7 @@ public class C8N9TicTacToe {
             if (playerChoice >= 1 && playerChoice <= 9) {
                 chosenSpace = numToXY(playerChoice);
             } else {
-                System.out.println("Please only eneter values between 1 and 9.");
+                System.out.println("Please only enter values between 1 and 9.");
                 continue;
             }
             if (checkSpace(gameBoard, chosenSpace, " ")) {
@@ -86,8 +88,18 @@ public class C8N9TicTacToe {
     }
     
     public static void botMove(String[][] gameBoard, String botChar) {
-        // Allows the bot to make a single move
-        
+        // Allows the bot to make a (semi-Random) single move
+        // Then draws board
+        Random rand = new Random();
+        while (true) {
+            int spaceNum = (int) (rand.nextDouble() * 9); 
+            int[] space = numToXY(spaceNum);
+            if (gameBoard[space[0]][space[1]].equals(" ")) {
+                gameBoard[space[0]][space[1]] = botChar;
+                drawBoard(gameBoard);
+                return;
+            }
+        }
     }
     
     public static int checkWinner(String[][] gameBoard, String playerChar, String botChar) {
@@ -135,10 +147,25 @@ public class C8N9TicTacToe {
             }
         }
         
-        return 0;
+        //Check to see if board is full, despite no winner! A TIE!
+        int fullBoardCount = 0;
+        for (int i = 1; i <=9; i++) {
+            int[] spaceXY = numToXY(i);
+            if (gameBoard[spaceXY[0]][spaceXY[1]].equals(" ")) {
+                return 0;
+            } else {
+                fullBoardCount++;
+            }
+        }
+        if (fullBoardCount == 9) {
+            return 1;
+        }
+        return 0; //This should never be reached-- needed for compiler
     }
     
     public static int[] numToXY(int numpad) {
+        // Converts a numpad value to a two item array representing ordered pair,
+        // from 0,0 (7) to 2,2 (3). First value is y, or which row you're on
         int[] xy = new int[2];
         
         switch (numpad) {
@@ -177,8 +204,8 @@ public class C8N9TicTacToe {
     }
     
     public static boolean checkSpace(String[][] gameBoard, int[] spaceXY, String checkFor) {
-        // Checks if spaceXY[x][y] is free (equals " ") on gameBoard[x][y]
-        // Returns true if space is empty, aka .equals(" "), else false
+        // Checks if spaceXY[x][y] is equal to "checkFor" argument on gameBoard[x][y]
+        // Returns true if space is equal to "checkFor" value, else false
         if (gameBoard[spaceXY[0]][spaceXY[1]].equals(checkFor)) {
             return true;
         }
