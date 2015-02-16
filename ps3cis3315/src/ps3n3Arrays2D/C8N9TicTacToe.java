@@ -22,16 +22,24 @@ public class C8N9TicTacToe {
         while (true) {
             //Game logic 
             playerMove(board, playerChar, sc);
-            if (checkWinner(board) > 0) {
+            checkWinner(board, playerChar, botChar);
+            if (checkWinner(board, playerChar, botChar) > 0) {
                 break;
             }
             botMove(board, botChar);
-            if (checkWinner(board) > 0) {
+            if (checkWinner(board, playerChar, botChar) > 0) {
                 break; 
             }
         }
         // Rechecks for winner/tie and stores as variable to describe winner/tie
-        int winner = checkWinner(board);
+        int winner = checkWinner(board, playerChar, botChar);
+        if (winner == 2) {
+            System.out.println("PC WINS");
+        } else if (winner == 3) {
+            System.out.println("BOT WINS");
+        } else {
+            System.out.println("A TIE!");
+        }
     }
     
     public static void populateEmptyBoard(String[][] gameBoard) {
@@ -45,8 +53,7 @@ public class C8N9TicTacToe {
     }
     
     public static void drawBoard(String[][] gameBoard) {
-        // Clears console and prints new board
-        clearConsole();
+        // Prints new board
         for (int c = 0; c < gameBoard.length; c++) {
             for (int r = 0; r < gameBoard[c].length; r ++) {
                 System.out.print("|" + gameBoard[c][r]);
@@ -57,20 +64,21 @@ public class C8N9TicTacToe {
     
     public static void playerMove(String[][] gameBoard,String playerChar, Scanner inpt) {
         // Allows the player to make a single move, using the numpad layout
-        int[] chosenSpace = new int[2];
+        int[] chosenSpace;// = new int[2];
                 
         System.out.println();
         while (true) {
             int playerChoice = Validator.getInt(inpt, "Enter space to place '" + playerChar + "' based on numpad coordinates: ");
             if (playerChoice >= 1 && playerChoice <= 9) {
-                chosenSpace = numpadToCoord(playerChoice);
+                chosenSpace = numToXY(playerChoice);
             } else {
                 System.out.println("Please only eneter values between 1 and 9.");
                 continue;
             }
-            if (checkSpace(gameBoard, chosenSpace)) {
+            if (checkSpace(gameBoard, chosenSpace, " ")) {
                 gameBoard[chosenSpace[0]][chosenSpace[1]] = playerChar;
                 drawBoard(gameBoard);
+                return;
             } else {
                 System.out.println("Please choose a vacant space.");
             }
@@ -78,17 +86,59 @@ public class C8N9TicTacToe {
     }
     
     public static void botMove(String[][] gameBoard, String botChar) {
-        // Allows the NPC bot to make a single move
+        // Allows the bot to make a single move
+        
     }
     
-    public static int checkWinner(String[][] gameBoard) {
+    public static int checkWinner(String[][] gameBoard, String playerChar, String botChar) {
         // Processes gameboard to determine if there is a winner
         // Returns 0 for no winner yet, 1 for tie, 2 for PC, 3 for NPC
+        
+        // Check horizontals/rows first
+        for (int r = 0; r < 3; r++) {
+            // Check if space is not blank, and if all spaces on row share the character
+            if (gameBoard[0][r].equals(gameBoard[1][r]) && gameBoard[1][r].equals(gameBoard[2][r])) {
+                if (gameBoard[0][r].equals(playerChar)) {
+                    return 2;
+                } else if (gameBoard[0][r].equals(botChar))  {
+                    return 3;
+                }
+            }
+        }
+        
+        // Now check columns/verticals victories
+        for (int c = 0; c < 3; c++) {
+            // Check if space is not blank, and if all spaces on row share the character
+            if (gameBoard[c][0].equals(gameBoard[c][1]) && gameBoard[c][1].equals(gameBoard[c][2])) {
+                if (gameBoard[c][0].equals(playerChar)) {
+                    return 2;
+                } else if (gameBoard[c][0].equals(botChar))  {
+                    return 3;
+                }
+            }
+        }
+        
+        // Check diagonals
+        if (gameBoard[2][0].equals(gameBoard[1][1]) && gameBoard[1][1].equals(gameBoard[0][2])) {
+            if (gameBoard[1][1].equals(playerChar)) {
+                    return 2;
+            } else if (gameBoard[1][1].equals(botChar))  {
+                    return 3;
+            }
+        }
+        
+        if (gameBoard[0][0].equals(gameBoard[1][1]) && gameBoard[1][1].equals(gameBoard[2][2])) {
+            if (gameBoard[1][1].equals(playerChar)) {
+                    return 2;
+            } else if (gameBoard[1][1].equals(botChar))  {
+                    return 3;
+            }
+        }
         
         return 0;
     }
     
-    public static int[] numpadToCoord(int numpad) {
+    public static int[] numToXY(int numpad) {
         int[] xy = new int[2];
         
         switch (numpad) {
@@ -126,34 +176,12 @@ public class C8N9TicTacToe {
         return xy;
     }
     
-    public static boolean checkSpace(String[][] gameBoard, int[] spaceXY) {
+    public static boolean checkSpace(String[][] gameBoard, int[] spaceXY, String checkFor) {
         // Checks if spaceXY[x][y] is free (equals " ") on gameBoard[x][y]
         // Returns true if space is empty, aka .equals(" "), else false
-        if (gameBoard[spaceXY[0]][spaceXY[1]].equals(" ")) {
+        if (gameBoard[spaceXY[0]][spaceXY[1]].equals(checkFor)) {
             return true;
         }
         return false;
     }
-    
-    public final static void clearConsole()
-{
-    try
-    {
-        final String os = System.getProperty("os.name");
-
-        if (os.contains("Windows"))
-        {
-            Runtime.getRuntime().exec("cls");
-        }
-        else
-        {
-            Runtime.getRuntime().exec("clear");
-        }
-    }
-    catch (final Exception e)
-    {
-        System.out.println("(Console clear failure)");
-    }
-}
-}
- 
+} 
