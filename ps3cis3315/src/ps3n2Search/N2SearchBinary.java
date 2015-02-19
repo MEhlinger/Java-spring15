@@ -16,7 +16,7 @@ public class N2SearchBinary {
     public static void main(String[] args) {
         Random pseudoRandom = new Random();
         Stopwatch clock = new Stopwatch();
-        int[] vals = new int[100_000000];
+        int[] vals = new int[100_000];
         
         //Populate array
         for (int i =0; i < vals.length; i++) {

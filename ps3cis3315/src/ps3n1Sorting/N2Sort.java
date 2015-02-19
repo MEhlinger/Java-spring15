@@ -19,7 +19,7 @@ public class N2Sort {
         Random rand = new Random();
         Stopwatch clock = new Stopwatch();
         
-        int[] a = new int[100_000];
+        int[] a = new int[10];
         
         
         for (int i =0; i < a.length; i++) {
