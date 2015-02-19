@@ -196,7 +196,7 @@ public class C8N9TicTacToe {
             case 9: xy[0] = 0;
                     xy[1] = 2;
                     break;
-            default: System.out.println("Invalid switch error : numpadToCoord()");
+            default: //System.out.println("Invalid switch error : numpadToCoord()");
                     break;
         }
         
