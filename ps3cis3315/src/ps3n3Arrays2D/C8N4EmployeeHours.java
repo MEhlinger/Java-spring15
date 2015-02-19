@@ -22,7 +22,7 @@ public class C8N4EmployeeHours {
                 System.out.print(hours[i][j] + " ");
                 totalHours += hours[i][j];
             }
-            System.out.println(totalHours);
+            System.out.println(", Total: " + totalHours);
         }
     }
 }
