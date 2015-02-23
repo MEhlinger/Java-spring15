@@ -1,0 +1,21 @@
+Suppose you have an array a[] of n integers
+sum = Sum(a[0]+a[1]+...+a[n])
+average = sum / n
+
+Suppose array a[] contains {50, 60, 70, 80, 90}
+What is the average? 70
+
+Suppose array b[] contains {70, 70, 70, 70, 70}
+What is the average? 70
+
+How can we distinguish between these two arrays?
+50-70 = (-20)^2 = 400
+60-70 = (-10)^2 = 100
+70-70 = 0^2     =   0 
+80-70 = 10^2    = 100 
+90-70 = 20^2    = 400
+----------        ---
+        0        1000 sum of deviations squared
+		
+standard deviation formula
+sd = sqrt(sum((avg-a[i])^2) / (n-1))
