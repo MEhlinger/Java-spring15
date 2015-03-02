@@ -77,7 +77,7 @@ public class CardTest {
     @Test
     public void testIsIsHidden() {
         System.out.println("isIsHidden");
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.isIsHidden();
         assertEquals(expResult, result);
     }
@@ -88,8 +88,8 @@ public class CardTest {
     @Test
     public void testSetIsHidden() {
         System.out.println("setIsHidden");
-        boolean hiding = false;
-        boolean expResult = false;
+        boolean hiding = true;
+        boolean expResult = true;
         instance.setIsHidden(hiding);
         boolean result = instance.isIsHidden();
         assertEquals(expResult, result);
