@@ -47,18 +47,6 @@ public class CardStackTest {
     }
 
     /**
-     * Test of draw method, of class CardStack.
-     */
-    @Test
-    public void testDraw() {
-        System.out.println("draw");
-        CardStack instance = new CardStack();
-        instance.draw();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of peek method, of class CardStack.
      */
     @Test

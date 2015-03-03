@@ -1,7 +1,8 @@
-
-import java.util.Scanner;
-
 package ps4n7CardGames;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import static myutil.Validator.getLine;
 
 /**
  *
@@ -14,69 +15,113 @@ public class Blackjack {
         CardStack deck = new CardStack();
         deck.shuffle();
 
-        int playerScore;
-        int dealerScore;
+        int playerScore = 0;
+        int dealerScore = 0;
 
-        boolean playerHit;
-        boolean dealerHit;
+        boolean playerHit = false;
+        boolean dealerHit = false;
 
-        ArrayList playerHand;
-        ArrayList dealerHand;
+        ArrayList<Card> playerHand = new ArrayList<Card>();
+        ArrayList<Card> dealerHand = new ArrayList<Card>();
 
-        Scanner sc = new Scanner();
+        Scanner sc = new Scanner(System.in);
 
         boolean playing = true;
+        
+        Card newCard; // Used for adding new draws to score
 
 
         // Dealerbot gets cards, one face down, one up
-        dealerHand.add(deck.draw());
-        dealerHand.get(0).setIsHidden(true);
-        dealerHand.add(deck.draw());
+        hit(deck, dealerHand);
+        newCard = dealerHand.get(0);
+        newCard.setIsHidden(true);
+        newCard = (dealerHand.get(dealerHand.size() - 1));
+        dealerScore = addToScore(newCard, dealerScore);
+        hit(deck, dealerHand);
+        newCard = (dealerHand.get(dealerHand.size() - 1));
+        dealerScore = addToScore(newCard, dealerScore);
+        
         // Player gets 2 cards
-        playerHand.add(deck.draw());
-        playerHand.add(deck.draw());
+        hit(deck, playerHand);
+        newCard = (playerHand.get(playerHand.size() - 1));
+        playerScore = addToScore(newCard, playerScore);
+                
+        hit(deck, playerHand);
+        newCard = (playerHand.get(playerHand.size() - 1));
+        playerScore = addToScore(newCard, playerScore);
+      
         // Check for nat 21s 
-        if (anyNat21) {
-            player = false;
+        if (anyNat21(playerScore, dealerScore)) {
+            playing = false;
         }
 
         while (playing) {
             // Set the playerHit and dealerHit counters back to 0 for the new turn
             playerHit = false;
             dealerHit = false;
+            
             // Print player hand and dealerbot hand.
             printHand(playerHand, "Your");
             printHand(dealerHand, "Dealerbot");
+            
             // Will player hit? Add card to hand if so, and add card val to score.
-            response = getLine(sc, "Will you hit? Y or N: ", "Y|N");
-            if (response == "Y") {
-                playerHand.add(deck.draw());
-                addToScore(playerHand.get(playerHand.size - 1), playerScore);
+            String response = getLine(sc, "Will you hit? Y or N: \n", "Y|N");
+            if ("Y".equals(response)) {
+                hit(deck, playerHand);
+                newCard = (playerHand.get(playerHand.size() - 1));
+                playerScore = addToScore(newCard, playerScore);
+                playerHit = true;
             }
+            
             // Is player bust? If so, set winner and break;
             if (isBust(playerScore)) {
                 System.out.println("Dealerbot wins!");
                 break;
             }
+            
             // Print player hand and dealerbot hand.
             printHand(playerHand, "Your");
             printHand(dealerHand, "Dealerbot");
+            
             // Will bot hit? Add card to hand, and add card value to bot score.
             if (willDealerHit(dealerScore)) {
-                dealerHand.add(deck.draw());
+                hit(deck, dealerHand);
+                newCard = (dealerHand.get(dealerHand.size() - 1));
+                dealerScore = addToScore(newCard, dealerScore);
+                dealerHit = true;
             }
+            
             // Is bot bust? If so, set winner and break.
             if (isBust(dealerScore)) {
                 System.out.println("You win!");
+                
                 break;
             }
+            
             // Did neither player hit? If so, check for winner by comparing the two.
             if (playerHit == false && dealerHit == false) {
                 whoWon(playerScore, dealerScore);
+                break;
             }
+            
+            System.out.println("-------next-round--------");
         }
+        
+        System.out.println("---------GAME------OVER----------");
+        System.out.println("Finals Hands:");
+        
+        newCard = dealerHand.get(0);
+        newCard.setIsHidden(false);
+        
+        printHand(playerHand, "Your");
+        printHand(dealerHand, "Dealerbot");
+        
+        System.out.println("Your final score: " + playerScore);
+        System.out.println("Dealerbot's final score: " + dealerScore);
     }
 
+    
+    // NON-MAIN METHODS
 
     public static int cardPointValue(Card card) {
         if (card.getRANK_VALUE() > 7) {
@@ -96,30 +141,28 @@ public class Blackjack {
         return newScore;
     }
 
-    public static Card hit() {
-        return(deck.draw());
-    }
-
     public static boolean willDealerHit(int dealerScore) {
-        if (dealerScore < 17) {
-            dealerHit = true;
-            return true;
+        return (dealerScore < 17);
+    }
+    
+    public static void hit(CardStack deck, ArrayList hand) {
+        if (!deck.empty()) {
+            hand.add(deck.pop());
+        } else {
+            System.out.println("Draw failed: cannot draw from an empty deck!");
         }
-        return false;
     }
 
-    public void printHand (ArrayList cards, String whoseHand) {
+    public static void printHand (ArrayList cards, String whoseHand) {
         System.out.print(whoseHand + " hand: ");
-        for (int i = 0; i < cards.length; i++) {
-            System.out.print(cards[i].toString());
+        for (int i = 0; i < cards.size(); i++) {
+            System.out.print(cards.get(i).toString() + " / ");
         }
+        System.out.print("\n\n");
     }
 
     public static boolean isBust(int score) {
-        if (score > 21) {
-            return true;
-        }
-        return false;
+        return (score > 21);
     }
 
     public static void whoWon(int playerScore, int dealerScore) {

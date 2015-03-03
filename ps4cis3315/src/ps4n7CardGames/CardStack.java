@@ -49,16 +49,16 @@ public class CardStack {
         stackArray[++top] = card;
     }
     
-    public void draw() {
+    /*public void draw() {
         // Wrapper method for "pop" that checks to make sure deck isn't empty
         if (!empty()) {
             pop();
         } else {
             System.out.println("Draw failed: cannot draw from an empty deck!");
         }
-    }
+    }*/
     
-    private Card pop() {
+    public Card pop() {
         // Returns top card from deck/stack, then decrements top
         return stackArray[top--];
     }
