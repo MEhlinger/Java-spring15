@@ -124,7 +124,7 @@ public class Blackjack {
     // NON-MAIN METHODS
 
     public static int cardPointValue(Card card) {
-        if (card.getRANK_VALUE() > 7) {
+        if (card.getRANK_VALUE() > 7 && card.getRANK_VALUE() != 12) {
             return 10;
         } else if (card.getRANK_VALUE() == 12) {
             return 11; // Ace value variability handles in addToScore()
