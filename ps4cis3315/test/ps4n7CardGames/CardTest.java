@@ -75,10 +75,10 @@ public class CardTest {
      * Test of isIsHidden method, of class Card.
      */
     @Test
-    public void testIsIsHidden() {
-        System.out.println("isIsHidden");
+    public void testIsHidden() {
+        System.out.println("isHidden");
         boolean expResult = false;
-        boolean result = instance.isIsHidden();
+        boolean result = instance.isHidden();
         assertEquals(expResult, result);
     }
 
@@ -86,12 +86,12 @@ public class CardTest {
      * Test of setIsHidden method, of class Card.
      */
     @Test
-    public void testSetIsHidden() {
-        System.out.println("setIsHidden");
+    public void testSetHidden() {
+        System.out.println("setHidden");
         boolean hiding = true;
         boolean expResult = true;
-        instance.setIsHidden(hiding);
-        boolean result = instance.isIsHidden();
+        instance.setHidden(hiding);
+        boolean result = instance.isHidden();
         assertEquals(expResult, result);
     }
 
