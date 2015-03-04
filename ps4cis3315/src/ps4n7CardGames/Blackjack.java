@@ -7,6 +7,12 @@ import static myutil.Validator.getLine;
 /**
  *
  * @author Marshall Ehlinger
+ * 
+ * A complete blackjack game played in the console,
+ * where aces are exclusively high. Done for practice--
+ * Main assignment for class uses CardHand and Game21, in 
+ * addition to Card and CardStack, control game logic. 
+ * This uses only Card and CardStack.
  */
 public class Blackjack {
     
@@ -18,8 +24,8 @@ public class Blackjack {
         int playerScore = 0;
         int dealerScore = 0;
 
-        boolean playerHit = false;
-        boolean dealerHit = false;
+        boolean playerHit;
+        boolean dealerHit;
 
         ArrayList<Card> playerHand = new ArrayList<Card>();
         ArrayList<Card> dealerHand = new ArrayList<Card>();
@@ -34,7 +40,7 @@ public class Blackjack {
         // Dealerbot gets cards, one face down, one up
         hit(deck, dealerHand);
         newCard = dealerHand.get(0);
-        newCard.setIsHidden(true);
+        newCard.setHidden(true);
         newCard = (dealerHand.get(dealerHand.size() - 1));
         dealerScore = addToScore(newCard, dealerScore);
         hit(deck, dealerHand);
@@ -108,10 +114,10 @@ public class Blackjack {
         }
         
         System.out.println("---------GAME------OVER----------");
-        System.out.println("Finals Hands:");
+        System.out.println("Finals Hands: ");
         
         newCard = dealerHand.get(0);
-        newCard.setIsHidden(false);
+        newCard.setHidden(false);
         
         printHand(playerHand, "Your");
         printHand(dealerHand, "Dealerbot");
@@ -127,7 +133,7 @@ public class Blackjack {
         if (card.getRANK_VALUE() > 7 && card.getRANK_VALUE() != 12) {
             return 10;
         } else if (card.getRANK_VALUE() == 12) {
-            return 11; // Ace value variability handles in addToScore()
+            return 11; // Ace not variable, always 11
         }
         return card.getRANK_VALUE() + 2;
     }
@@ -135,9 +141,6 @@ public class Blackjack {
     public static int addToScore(Card newCard, int score) {
         // Checks to see if it's an ace, adjusts ace to 1 if (score += 11) > 21
         int newScore = score + cardPointValue(newCard);
-        if (newScore > 21 && newCard.getRANK_VALUE() == 12) {
-            score -= 10; // Adjust for the difference between a high ace and a low ace (11 to 1)
-        }
         return newScore;
     }
 
