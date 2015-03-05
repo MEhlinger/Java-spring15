@@ -15,13 +15,15 @@ public class Game21 {
     private boolean gameOver;
     
     public Game21() {
-        gameOver = false;
+        gameOver = true;
     }
     
     public void newGame() {
         deck = new CardStack();
         playerHand = new CardHand();
         dealerHand = new CardHand();
+        
+        deck.shuffle();
         
         // Deal out four cards
         Card card = deck.pop();
@@ -68,7 +70,7 @@ public class Game21 {
         this.gameOver = gameOver;
     }
     
-    public String gameOver() {
+    public String getWinnerString() {
         String s = "";
         setGameOver(true);
         if (busted(playerHand)) {
@@ -83,21 +85,25 @@ public class Game21 {
         return s;
     }
     
-    // Methods for testing //
-    
-    public  String getPlayerHandString() {
-        return playerHand.toString();
+    public CardHand getPlayerHand() {
+        return playerHand;
     }
     
-    public String getDealerHandString() {
-        return dealerHand.toString();
+    public CardHand getDealerHand() {
+        return dealerHand;
+    }
+    
+    // Methods for testing //
+    public String getHandString(CardHand hand) {
+        return hand.toString();
     }
     
     public static void main(String[] args) {
         Game21 game = new Game21();
         game.newGame();
-        System.out.println(game.getPlayerHandString());
-        System.out.println(game.getDealerHandString());
+        // SHUFFLE ON THIS LINE...
+        System.out.println(game.getHandString(game.getPlayerHand()));
+        System.out.println(game.getHandString(game.getDealerHand()));
     }
     
     

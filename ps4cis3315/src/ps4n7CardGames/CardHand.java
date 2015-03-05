@@ -39,8 +39,8 @@ public class CardHand {
     public String toString() {
         String s = "";
         for (int i = 0; i < numCards; i++) {
-           s += hand[i].toString();
-           s += " / ";
+            s += hand[i].toString();
+            s += " / ";
         }
         return s;
     }
