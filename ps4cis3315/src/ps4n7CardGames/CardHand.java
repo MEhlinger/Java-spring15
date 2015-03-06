@@ -26,11 +26,24 @@ public class CardHand {
         hand[numCards++] = c;
     }
     
+    public Card peek() {
+        return hand[numCards];
+    }
+    
     public int score21() {
         // Stub
         int score = 0;
+        int aces = 0;
         for (int i = 0; i < numCards; i++) {
             score += hand[i].getValue21();
+            if (hand[i].getRANK_VALUE() == 12) {
+                aces++;
+            }
+        }
+        
+        while (score > 21 && aces > 0) {
+            aces--;
+            score -= 10;
         }
         return score;
     }

@@ -13,12 +13,17 @@ public class Game21 {
     private CardHand playerHand = new CardHand();
     private CardHand dealerHand = new CardHand();
     private boolean gameOver;
+    private int playerWins;
+    private int dealerWins;
     
     public Game21() {
         gameOver = true;
+        playerWins = 0;
+        dealerWins = 0;
     }
     
     public void newGame() {
+        setGameOver(false);
         deck = new CardStack();
         playerHand = new CardHand();
         dealerHand = new CardHand();
@@ -51,6 +56,11 @@ public class Game21 {
         return card;
     }
     
+    public Card handPeek(CardHand hand) {
+        // returns top card from hand
+        return hand.peek();
+    }
+    
     public int getHandScore(CardHand hand) {
         // Totals are returns the score of the player's hand.
         // Just a coat for a CardHand method that does 100% of the work
@@ -73,14 +83,18 @@ public class Game21 {
     public String getWinnerString() {
         String s = "";
         setGameOver(true);
-        if (busted(playerHand)) {
-            s += "Player busted!";
+        if (busted(playerHand) && busted(dealerHand)) {
+            s += "push";
+        } else if (busted(playerHand)) {
+            s += "dealer";
         } else if (busted(dealerHand)) {
-            s += "Dealer busted!";
+            s += "player";
         } else if (getHandScore(playerHand) > getHandScore(dealerHand)) {
-            s+= "Player wins! ";
+            s+= "player";
+        } else if (getHandScore(playerHand) == getHandScore(dealerHand)) {
+            s+= "push";
         } else {
-            s+= "Dealer wins! ";
+            s+= "dealer";
         }
         return s;
     }
@@ -95,16 +109,22 @@ public class Game21 {
     
     // Methods for testing //
     public String getHandString(CardHand hand) {
-        return hand.toString();
+        return hand.toString() + getHandScore(hand);
     }
     
-    public static void main(String[] args) {
-        Game21 game = new Game21();
-        game.newGame();
-        // SHUFFLE ON THIS LINE...
-        System.out.println(game.getHandString(game.getPlayerHand()));
-        System.out.println(game.getHandString(game.getDealerHand()));
+    public int getPlayerWins() {
+        return playerWins;
     }
     
+    public int getDealerWins() {
+        return dealerWins;
+    }
     
+    public void updateScoreBoard() {
+        if (getWinnerString().equals("player")) {
+            playerWins++;
+        } else if (getWinnerString().equals("dealer")) {
+            dealerWins++;
+        }
+    }
 }
