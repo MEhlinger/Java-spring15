@@ -5,6 +5,7 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+image/
 
 *.class
 
@@ -13,3 +14,9 @@ nb-configuration.xml
 *.ear
 
 *.docx
+
+*.jpg
+*.GIF
+*.gif
+*.png
+*.bmp
