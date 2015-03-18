@@ -1,18 +1,18 @@
 package chapter14;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.geometry.Insets;
-import javafx.stage.Stage;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
- * Experiment with ImageView. Try displaying 3 random playing cards.
+ * Experimented with ImageView. Tried displaying 3 random playing cards.
  *
- * @author Your Name Here
+ * @author Marshall Ehlinger
  */
 public class Ex06ShowImage extends Application {
 
@@ -21,16 +21,18 @@ public class Ex06ShowImage extends Application {
         // Create a pane to hold the image views
         Pane pane = new HBox(10);
         pane.setPadding(new Insets(5, 5, 5, 5));
-        Image image = new Image("image/us.gif");
+        Image image = new Image("image/card/21.png");
         //Image image = new Image("http://www.cs.armstrong.edu/liang/image/us.gif");
         pane.getChildren().add(new ImageView(image));
 
-        ImageView imageView2 = new ImageView(image);
+        Image image2 = new Image("image/card/13.png");
+        ImageView imageView2 = new ImageView(image2);
         imageView2.setFitHeight(100);
         imageView2.setFitWidth(100);
         pane.getChildren().add(imageView2);
 
-        ImageView imageView3 = new ImageView(image);
+        Image image3 = new Image("image/card/44.png");
+        ImageView imageView3 = new ImageView(image3);
         imageView3.setRotate(90);
         pane.getChildren().add(imageView3);
 

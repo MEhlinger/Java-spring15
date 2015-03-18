@@ -10,9 +10,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 /**
- * Experiment with fonts, colors, and styles.
+ * Experimented with fonts, colors, and styles.
  *
- * @author Your Name Here
+ * @author Marshall Ehlinger
  */
 public class Ex05FontDemo extends Application {
 
@@ -25,12 +25,12 @@ public class Ex05FontDemo extends Application {
         Circle circle = new Circle();
         circle.setRadius(50);
         circle.setStroke(Color.BLACK);
-        circle.setFill(new Color(0.5, 0.5, 0.5, 0.1));
+        circle.setFill(new Color(0.5, 0.9, 0.5, 0.7));
         pane.getChildren().add(circle); // Add circle to the pane
 
         // Create a label and set its properties
-        Label label = new Label("JavaFX");
-        label.setFont(Font.font("Times New Roman",
+        Label label = new Label("Java FX");
+        label.setFont(Font.font("Monospace",
                 FontWeight.BOLD, FontPosture.ITALIC, 20));
         pane.getChildren().add(label);
 
