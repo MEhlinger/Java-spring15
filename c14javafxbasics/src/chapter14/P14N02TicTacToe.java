@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Your Name Here
+ * @author Marshall Ehlinger
  */
 public class P14N02TicTacToe extends Application {
     
