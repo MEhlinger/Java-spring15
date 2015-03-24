@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * moving the ball left, right, up, and down. Check the boundary to prevent the
  * ball from moving out of sight completely.
  *
- * @author Your Name Here
+ * @author Marshall Ehlinger
  */
 public class P15N3MoveBall extends Application {
 

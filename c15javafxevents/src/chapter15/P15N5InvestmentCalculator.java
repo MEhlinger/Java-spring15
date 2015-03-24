@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * an investment at a given interest rate for a specified number of years. See
  * problem in your book for details.
  *
- * @author Your name here
+ * @author Marshall Ehlinger
  */
 public class P15N5InvestmentCalculator extends Application {
 
