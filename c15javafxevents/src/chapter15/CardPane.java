@@ -1,10 +1,9 @@
 package chapter15;
 
-import java.util.Random;
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import java.io.File;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -13,38 +12,32 @@ import java.io.File;
  *  Helper class for p15N1FourCards.
  * 
  */
-public class CardPane extends FlowPane {
+public class CardPane extends StackPane {
     
         
-    Image card1 = new Image("image/card/1.png");
-    Image card2 = new Image("image/card/2.png");
-    Image card3 = new Image("image/card/3.png");
-    Image card4 = new Image("image/card/4.png");
-    
-    ImageView cView1 = new ImageView(card1);
-    ImageView cView2 = new ImageView(card2);
-    ImageView cView3 = new ImageView(card3);
-    ImageView cView4 = new ImageView(card4);
-    
-    File cardDir = new File("image/card");
-    String cardFiles[];
+    ImageView cards[] = new ImageView[4];
+    private final int CENTER_VAL = 100;
+    private final int OVERLAP_VAL = 80;
            
-    
     public CardPane() {
-        this.cardFiles = cardDir.list();
-        this.getChildren().addAll(cView1, cView2, cView3, cView4);
+        for (int i = 0; i < cards.length; i++) {
+            cards[i] = new ImageView();
+        }
+        newCards();
     }
     
     private String randCard() {
-        Random rand = new Random();
-        System.out.println(cardFiles[(int)Math.ceil(rand.nextFloat() * 52)]);
-        return "";
+        return "image/card/" + (int)Math.ceil(Math.random() * 54) + ".png";
+        
     }
     
-    public void newCards() {
-        card1 = new Image(randCard());
-        card2 = new Image(randCard());
-        card3 = new Image(randCard());
-        card4 = new Image(randCard());
+    public final void newCards() {
+        this.getChildren().clear();
+        for (int i = 0; i < cards.length; i++) {
+            cards[i] = new ImageView(new Image("image/card/" + (int)Math.ceil(Math.random() * 54) + ".png"));
+            this.getChildren().add(cards[i]);
+            StackPane.setMargin(cards[i], new Insets(0, this.CENTER_VAL, 0, (i * OVERLAP_VAL)));
+
+        }
     }
 }

@@ -1,11 +1,8 @@
 package chapter15;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -17,27 +14,32 @@ import javafx.stage.Stage;
  * @author Marshall Ehlinger
  */
 public class P15N3MoveBall extends Application {
-
-    @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    
+        @Override
+        public void start(Stage primaryStage) {
+            BallControlPane bPane = new BallControlPane();
+            
+            bPane.setOnKeyPressed(e ->  {
+                if (e.getCode() == KeyCode.UP) {
+                    bPane.keyUp();
+                } else if (e.getCode() == KeyCode.DOWN) {
+                    bPane.keyDown();
+                } else if (e.getCode() == KeyCode.LEFT) {
+                    bPane.keyLeft();
+                } else if (e.getCode() == KeyCode.RIGHT) {
+                    bPane.keyRight();
+                } else if (e.getCode() == KeyCode.SPACE) {
+                    bPane.brake();
+                }
+            });
+                        
+            Scene scene = new Scene(bPane, 500, 500);
+            primaryStage.setTitle("Move Tha' Ball");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            bPane.requestFocus();
+            
     }
 
     /**
