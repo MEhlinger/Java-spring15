@@ -32,7 +32,7 @@ public class P14N02TicTacToe extends Application {
         borderpane.setCenter(gpane);
         
         // Set label with scores
-        Label ltitle = new Label("Player X : " + xScore + " Player O : " + oScore +  " Cat : " + catScore);
+        Label ltitle = new Label("Human v Human TicTacToe");
         ltitle.setFont(Font.font(18));
         BorderPane.setAlignment(ltitle, Pos.CENTER);
         borderpane.setTop(ltitle);
@@ -64,6 +64,7 @@ public class P14N02TicTacToe extends Application {
                             catScore++;
                             gameOver = true;
                         }
+                        ltitle.setText("Player X : " + xScore + " Player O : " + oScore +  " Cat : " + catScore);
                     }
 
                     ltitle.setText("Player X : " + xScore + " Player O : " + oScore +  " Cat : " + catScore);
@@ -79,6 +80,7 @@ public class P14N02TicTacToe extends Application {
         }
         
         Button playAgain = new Button("Play Again");
+        playAgain.setStyle("-fx-base: #31ad9f; -fx-font: 22 courier");
         playAgain.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
