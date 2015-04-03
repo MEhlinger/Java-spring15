@@ -19,18 +19,21 @@ import javafx.stage.Stage;
  */
 public class N02Calculator extends Application {
 
-    GridPane gp = new GridPane();
-    Button[][] btn = new Button[4][4];
-    TextField tfResult;
+    private GridPane gp = new GridPane();
+    private Button[][] btn = new Button[4][4];
+    
+    private TextField tfResult;
+    
+    private int calculationStep = 1;
+    private double num1 , num2;
+    private String operator, lastKeyPressed;
     
     
     @Override
     public void start(Stage primaryStage) {
         BorderPane bpane = new BorderPane();
-        
-        bpane.setCenter(gp);
-        
-        tfResult = new TextField(". . .");
+                
+        tfResult = new TextField();
         tfResult.setEditable(false);
         tfResult.setAlignment(Pos.BOTTOM_RIGHT);
         tfResult.setFont(Font.font("Monospace", 36));
@@ -38,8 +41,9 @@ public class N02Calculator extends Application {
         bpane.setTop(tfResult);
         
         bpane.setCenter(getButtonGridPane());
+        gp.setAlignment(Pos.CENTER);
         
-        Scene scene = new Scene(bpane);
+        Scene scene = new Scene(bpane, 400, 500);
         
         primaryStage.setTitle("MarshallCalc");
         primaryStage.setScene(scene);
@@ -59,7 +63,7 @@ public class N02Calculator extends Application {
         for (int row = 0; row < buttonNameArray.length; row++) {
             for (int col = 0; col < buttonNameArray[0].length; col++) {
                 btn[row][col] = new Button(buttonNameArray[row][col]);
-                btn[row][col].setStyle("-fx-base: #ad319f; -fx-font-size: 36 monospace");
+                btn[row][col].setStyle("-fx-base: #666666; -fx-font-size: 36 monospace");
                 btn[row][col].setMinSize(80,80);
                 
                 btn[row][col].setOnAction(bh);
@@ -67,6 +71,68 @@ public class N02Calculator extends Application {
             }
         }
         return gp;
+    }
+    
+    class ButtonHandler implements EventHandler<ActionEvent> {
+          
+        @Override
+        public void handle(ActionEvent event) {
+            
+            
+            Button b = (Button) event.getSource();
+            System.out.println("Button Clicked is " + b.getText());
+            switch (b.getText()) {
+                case "/" : 
+                case "*" : 
+                case "+" : 
+                case "-" : 
+                    if (calculationStep == 2) {
+                        calculate();
+                    }
+                    operator = b.getText();
+                    tfResult.setText("");
+                    calculationStep = 2;
+                    break;
+                case "=" :
+                    if (lastKeyPressed.equals("=")) {
+                        tfResult.setText("");
+                        calculationStep = 1;
+                        num1 = num2 = 0;
+                    } else {
+                        calculate();
+
+                    }
+                    break;
+                default:
+                    tfResult.setText(tfResult.getText() + b.getText());
+                    if (calculationStep == 1) {
+                        num1 = Double.parseDouble(tfResult.getText());
+                    } else if (calculationStep == 2) {
+                        num2 = Double.parseDouble(tfResult.getText());
+                    }
+            }
+            lastKeyPressed = b.getText();
+
+        }
+        
+        void calculate() {
+            if (calculationStep == 2) {
+                switch (operator) {
+                    case "+": num1 = num1+num2;
+                        break;
+                    case "-": num1 = num1-num2;
+                        break;
+                    case "/": num1 = num1/num2;
+                        break;
+                    case "*": num1 = num1*num2;
+                        break;
+                }
+                tfResult.setText("" + num1);
+                calculationStep = 1;
+                num2 = 0;
+                operator = "";
+            }
+        }
     }
 
     /**
@@ -76,12 +142,6 @@ public class N02Calculator extends Application {
         launch(args);
     }
 
-    class ButtonHandler implements EventHandler<ActionEvent> {
-          
-        @Override
-        public void handle(ActionEvent event) {
-            System.out.println("Button Clicked.");
-        }
-    }
+
 
 }
