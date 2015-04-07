@@ -5,6 +5,7 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+sounds/
 image/
 
 *.class
@@ -24,3 +25,4 @@ image/
 c14javafxbasics/
 c15javafxevents/
 c16javafxui/
+
