@@ -1,6 +1,7 @@
 package ps5;
 
 import javafx.application.Application;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -17,11 +18,14 @@ public class N07Pong extends Application {
     public void start(Stage primaryStage) {
         N07PongPane pongPane = new N07PongPane();
        
-        //Move Paddle With Mouse
+        pongPane.setOnMouseClicked(e -> pongPane.reset());
+        
         pongPane.setOnMouseMoved(e -> pongPane.paddleMove(e.getY()));
         
         
         Scene scene = new Scene(pongPane, 425, 400);
+        scene.cursorProperty().setValue(Cursor.NONE);
+        
         primaryStage.setTitle("PONG- by Marshall");
         primaryStage.setScene(scene);
         primaryStage.show();
