@@ -1,5 +1,6 @@
 package practice1;
 
+import java.text.DecimalFormat;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.beans.value.ChangeListener;
@@ -36,18 +37,21 @@ public class N01MedicalCalculator extends Application {
     private Label lblResult = new Label("");
     private String operation = "";
     private double result;
+    DecimalFormat outputFormat = new DecimalFormat("#.00");
 
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) {
         // Create UI
         VBox pane = new VBox(30);
-        pane.getChildren().addAll(lblTitle, tfWeight, rbP2K, rbK2P, btCalculate, lblResult);
+        pane.getChildren().addAll(lblTitle, tfWeight);
         lblTitle.setAlignment(Pos.CENTER);
         tfWeight.setAlignment(Pos.CENTER);
-//        rbP2K.setAlignment(Pos.CENTER);
-//        rbK2P.setAlignment(Pos.CENTER);
-//        btCalculate.setAlignment(Pos.CENTER);
-//        lblResult.setAlignment(Pos.CENTER);
+        VBox bottomPane = new VBox(30);
+        bottomPane.getChildren().addAll(rbP2K, rbK2P, btCalculate, lblResult);
+        pane.getChildren().add(bottomPane);
+        bottomPane.setAlignment(Pos.CENTER);
+        
+
         lblTitle.setStyle("-fx-font-size: 22pt; -fx-text-fill: red");
         tfWeight.setStyle("-fx-font-size: 22pt; -fx-text-fill: green");
         lblResult.setStyle("-fx-font-size: 22pt; -fx-text-fill: blue");
@@ -68,19 +72,17 @@ public class N01MedicalCalculator extends Application {
             }
         });
         
-        // Style the controls
-
         
         // Process button event
         btCalculate.setOnMouseClicked(e -> {
             if ("p2k".equals(operation)) {
                 double pounds = Double.parseDouble(tfWeight.getText());
                 result = pounds * 2.2;
-                lblResult.setText(Double.toString(result));
+                lblResult.setText(outputFormat.format(result));
             } else if ("k2p".equals(operation)) {
                 double kilos = Double.parseDouble(tfWeight.getText());
                 result = kilos / 2.2;
-                lblResult.setText(Double.toString(result));
+                lblResult.setText(outputFormat.format(result));
             }
         });
 
@@ -89,10 +91,6 @@ public class N01MedicalCalculator extends Application {
         primaryStage.setTitle("Medical Calculator"); // Set title
         primaryStage.setScene(scene); // Place the scene in the stage
         primaryStage.show(); // Display the stage
-    }
-
-    private void calculate() {
-
     }
 
     /**
