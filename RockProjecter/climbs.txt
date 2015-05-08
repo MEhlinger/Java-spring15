@@ -1,0 +1,5 @@
+Steelworker;rockRoute;5.11;Blue Run Rocks, PA;false;1
+Pressure Drop;problem;V1;Socorro, NM;false
+The Chip;rockRoute;5.6;Blue Run Rocks, PA;true;1
+Malaria;problem;V3;Rock Run, PA;true
+name;rockRoute;5;area;true;5
